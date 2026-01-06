@@ -16,8 +16,8 @@ class TestType(models.Model):
         return self.name
 
 
-class Tag(models.Model):
-    """Tag for grouping test cases."""
+class Label(models.Model):
+    """Label for grouping test cases."""
 
     name = models.CharField(max_length=50, unique=True)
 
@@ -34,7 +34,7 @@ class TestCase(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True, related_name="test_cases")
-    tags = models.ManyToManyField(Tag, related_name="test_cases", blank=True)
+    tags = models.ManyToManyField(Label, related_name="test_cases", blank=True)
     is_active = models.BooleanField(default=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="created_test_cases"
@@ -48,4 +48,3 @@ class TestCase(models.Model):
 
     def __str__(self):
         return self.title
-

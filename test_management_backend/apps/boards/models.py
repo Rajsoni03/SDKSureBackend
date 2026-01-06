@@ -122,6 +122,8 @@ class TestPC(models.Model):
     hostname = models.CharField(max_length=255, unique=True, help_text="Hostname of the PC")
     ip_address = models.GenericIPAddressField(unique=True, help_text="IP address of the PC")
     domain_name = models.CharField(max_length=255, blank=True, help_text="FQDN of the PC")
+    auth_token = models.CharField(max_length=200, blank=True, default="", help_text="Token used to authenticate with the PC")
+    workarea = models.CharField(max_length=50, blank=True, default="", help_text="Logical work area name/location")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="OFFLINE", help_text="PC status")
     os_version = models.CharField(max_length=50, choices=OS_VERSION_CHOICES, help_text="Operating system version")
     disk_mountpoint = models.CharField(max_length=255, default="/", help_text="Primary disk mount point")

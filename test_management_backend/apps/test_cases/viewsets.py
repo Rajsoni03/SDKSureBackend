@@ -1,7 +1,7 @@
 from rest_framework import permissions, viewsets
 
-from .models import Tag, TestCase, TestType
-from .serializers import TagSerializer, TestCaseSerializer, TestTypeSerializer
+from .models import Label, TestCase, TestType
+from .serializers import LabelSerializer, TestCaseSerializer, TestTypeSerializer
 
 
 class TestCaseViewSet(viewsets.ModelViewSet):
@@ -21,8 +21,7 @@ class TestTypeViewSet(viewsets.ModelViewSet):
     queryset = TestType.objects.all().order_by("name")
 
 
-class TagViewSet(viewsets.ModelViewSet):
-    serializer_class = TagSerializer
+class LabelViewSet(viewsets.ModelViewSet):
+    serializer_class = LabelSerializer
     permission_classes = [permissions.IsAuthenticated]
-    queryset = Tag.objects.all().order_by("name")
-
+    queryset = Label.objects.all().order_by("name")

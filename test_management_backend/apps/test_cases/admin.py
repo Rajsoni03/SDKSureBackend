@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tag, TestCase, TestType
+from .models import Label, TestCase, TestType
 
 
 @admin.register(TestCase)
@@ -16,8 +16,7 @@ class TestTypeAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
+@admin.register(Label)
+class LabelAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
-

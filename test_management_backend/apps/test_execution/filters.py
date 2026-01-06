@@ -4,10 +4,10 @@ from .models import TestRun
 
 
 class TestRunFilter(django_filters.FilterSet):
-    status = django_filters.CharFilter(field_name="status")
-    board = django_filters.NumberFilter(field_name="board_id")
+    name = django_filters.CharFilter(field_name="name", lookup_expr="icontains")
+    scenario = django_filters.NumberFilter(field_name="scenarios__id")
+    label = django_filters.NumberFilter(field_name="labels__id")
 
     class Meta:
         model = TestRun
-        fields = ["status", "board", "test_case"]
-
+        fields = ["name", "scenario", "label"]

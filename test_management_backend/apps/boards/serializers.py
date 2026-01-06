@@ -43,6 +43,8 @@ class TestPCSerializer(serializers.ModelSerializer):
             "hostname",
             "ip_address",
             "domain_name",
+            "auth_token",
+            "workarea",
             "status",
             "os_version",
             "disk_mountpoint",

@@ -4,52 +4,50 @@ from django.db import models
 from django.utils import timezone
 
 
-class TestRun(models.Model):
-    """Represents a single execution of a test case on a board."""
+class TestScenario(models.Model):
+    """Scenario grouping multiple test cases."""
 
-    STATUS_CHOICES = [
-        ("PENDING", "Pending"),
-        ("RUNNING", "Running"),
-        ("PAUSED", "Paused"),
-        ("COMPLETED", "Completed"),
-        ("FAILED", "Failed"),
-        ("KILLED", "Killed"),
-    ]
-
-    test_case = models.ForeignKey("test_cases.TestCase", on_delete=models.CASCADE, related_name="test_runs")
-    board = models.ForeignKey("boards.Board", on_delete=models.CASCADE, related_name="test_runs")
-    initiated_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="started_test_runs"
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    test_cases = models.ManyToManyField("test_cases.TestCase", related_name="scenarios", blank=True)
+    labels = models.ManyToManyField("test_cases.Label", related_name="scenarios", blank=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name="created_scenarios"
     )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="PENDING", db_index=True)
-    started_at = models.DateTimeField(null=True, blank=True)
-    finished_at = models.DateTimeField(null=True, blank=True)
-    output_log = models.TextField(blank=True)
+    updated_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name="updated_scenarios"
+    )
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class TestRun(models.Model):
+    """Represents a single execution run that can contain multiple scenarios."""
+
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    scenarios = models.ManyToManyField(TestScenario, related_name="test_runs", blank=True)
+    labels = models.ManyToManyField("test_cases.Label", related_name="test_runs", blank=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name="created_test_runs"
+    )
+    updated_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name="updated_test_runs"
+    )
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_at"]
-        indexes = [models.Index(fields=["status"])]
 
     def __str__(self):
-        return f"TestRun #{self.id} ({self.status})"
-
-    def start(self):
-        self.status = "RUNNING"
-        self.started_at = timezone.now()
-        self.save(update_fields=["status", "started_at"])
-
-    def complete(self, success: bool = True):
-        self.status = "COMPLETED" if success else "FAILED"
-        self.finished_at = timezone.now()
-        self.save(update_fields=["status", "finished_at"])
-
-    def can_pause(self):
-        return self.status == "RUNNING"
-
-    def can_kill(self):
-        return self.status in {"RUNNING", "PAUSED"}
+        return self.name
 
 
 class TestResult(models.Model):
@@ -68,4 +66,3 @@ class TestResult(models.Model):
 
     class Meta:
         ordering = ["created_at"]
-
