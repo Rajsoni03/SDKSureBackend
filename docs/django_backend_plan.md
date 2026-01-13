@@ -1405,7 +1405,7 @@ class TestRunConsumer(AsyncWebsocketConsumer):
         try:
             from apps.test_execution.models import TestRun
             testrun = TestRun.objects.get(id=self.testrun_id)
-            return (
+            return ( 
                 testrun.initiated_by == self.user or
                 self.user.is_admin
             )
