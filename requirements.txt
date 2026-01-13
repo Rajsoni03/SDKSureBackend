@@ -1,0 +1,49 @@
+Django==5.2.10
+djangorestframework==3.16.1
+djangorestframework_simplejwt==5.5.1
+django-cors-headers==4.9.0
+django-extensions==4.1
+django-filter==25.2
+psycopg2-binary==2.9.11
+python-dotenv==1.2.1
+daphne==4.2.1
+drf-spectacular==0.29.0
+channels==4.3.2
+whitenoise==6.11.0
+
+
+# channels-redis>=4.1
+# celery>=5.3
+# redis>=5.0
+# pydantic>=2.6
+# python-dotenv>=1.0
+# Pillow>=10.2
+# pyserial>=3.5
+# pyusb>=1.2
+# pusher>=3.3
+# python-json-logger>=2.0
+# inflection>=0.5
+
+
+####### Debugging Requirements #######
+# django-debug-toolbar>=4.2
+# ipython>=8.21
+
+
+####### Production Requirements #######
+# gunicorn>=21.2
+# uvicorn>=0.27
+
+
+####### Testing Requirements #######
+# pytest>=7.4
+# pytest-django>=4.8
+# pytest-cov>=4.1
+# factory-boy>=3.3
+# faker>=24.9
+# responses>=0.25
+# black>=24.3
+# flake8>=7.0
+# isort>=5.13
+# mypy>=1.10
+
