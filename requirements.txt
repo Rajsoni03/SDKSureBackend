@@ -10,6 +10,7 @@ daphne==4.2.1
 drf-spectacular==0.29.0
 channels==4.3.2
 whitenoise==6.11.0
+tzdata==2025.3
 
 
 # channels-redis>=4.1
