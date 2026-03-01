@@ -3,11 +3,11 @@ djangorestframework==3.16.1
 djangorestframework_simplejwt==5.5.1
 django-cors-headers==4.9.0
 # django-extensions==4.1
-# django-filter==25.2
-# psycopg2-binary==2.9.11
+django-filter==25.2
+psycopg2-binary==2.9.11
 django-auth-ldap==5.2.0
 # daphne==4.2.1
-# drf-spectacular==0.29.0
+drf-spectacular==0.29.0
 channels==4.3.2
 # whitenoise==6.11.0
 tzdata==2025.3
