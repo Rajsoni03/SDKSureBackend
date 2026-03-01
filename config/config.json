@@ -1,0 +1,12 @@
+{
+    "SECRET_KEY": "'django-insecure-8f0zs#%v2zis3(@8o&&mz#9ilwkvm#n(%d9nd4v0w$cklco#mp'",
+    "DEBUG": true,
+    "ALLOWED_HOSTS": ["*"],
+    "CORS_ALLOWED_ORIGINS": ["http://localhost", "http://127.0.0.1"],
+    "DB_ENGINE": "sqlite3",
+    "DB_NAME": "<DB_NAME>",
+    "DB_USER": "<DB_USER>",
+    "DB_PASSWORD": "<DB_PASSWORD>",
+    "DB_HOST": "<DB_HOST>",
+    "AUTH_LDAP_SERVER_URI": "ldap://ldap.example.com"
+}
