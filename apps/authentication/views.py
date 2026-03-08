@@ -17,7 +17,7 @@ User = get_user_model()
     summary="Login to obtain access and refresh tokens",
 )
 class LoginView(TokenObtainPairView):
-    """JWT login endpoint (email/username + password)."""
+    """JWT login endpoint (username + password)."""
 
 
 @extend_schema(
@@ -40,7 +40,6 @@ class CurrentUserView(APIView):
 
     def get(self, request):
         return Response(UserSerializer(request.user).data)
-
 
 
 @extend_schema_view(

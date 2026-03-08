@@ -19,11 +19,13 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from apps.authentication.urls import router as auth_router
+from apps.devices.urls import router as devices_router
 
 # Routers
 router = DefaultRouter()
 app_routers = [
-    auth_router
+    auth_router,
+    devices_router,
 ]
 for r in app_routers:
     for prefix, viewset, basename in r.registry:
@@ -41,3 +43,5 @@ urlpatterns = [
     path("api/v1/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     path("api/v1/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
+
+# openapi-generator-cli generate -i api.yaml -g typescript-axios -o src/services/

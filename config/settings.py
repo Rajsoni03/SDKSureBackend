@@ -188,9 +188,12 @@ SPECTACULAR_SETTINGS = {
 SESSION_COOKIE_AGE = 60 * 60 * 8  # 8 hours
 
 
-# LDAP Authentication settings
+# CORS settings
+CORS_ALLOWED_ORIGINS = CONFIG_DICT['CORS_ALLOWED_ORIGINS']
+CORS_ALLOW_CREDENTIALS = True
 
-# ldap info
+
+# LDAP Authentication settings
 AUTH_LDAP_CONNECTION_OPTIONS = {
     ldap.OPT_REFERRALS: 0
 }
